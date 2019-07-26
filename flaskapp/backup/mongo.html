@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>#3_ MongoDB와 연결하기</h1>
+    <div>
+        <p>연결이 성공되면 아래에 데이터가 뜰꺼야!</p>
+        <p>------------------------------------</p>
+        {% for i in data %}
+            <p>이름: {{i.user_name}}</p>
+            <p>이메일: {{i.user_id}}</p>
+            <p>비밀번호: {{i.password}}</p>
+            <p>---------------</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

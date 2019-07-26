@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <title>Micture</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+        <style>
+            #overlay {
+                position: fixed;
+                display: none;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgb(0, 0, 0);
+                z-index: 2;
+                cursor: pointer;
+            }
+        
+        </style>
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    {%- with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <script>
+                alert('{{ message }}');
+                </script>
+            {% endfor %}
+        {% endif %}
+    {% endwith -%}
+    <section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/background/login-register.jpg);">
+        <div class="login-box card">
+            <div class="card-body">
+                <form class="form-horizontal form-material" id="loginform" method = "POST" action="enrollNewMember" onsubmit="return checkPw()">
+                    <a href="javascript:void(0)" class="text-center db"><img src="../assets/images/logo-icon.png" alt="Home" /><br/><img src="../assets/images/logo-text.png" alt="Home" /></a>
+                    <h3 class="box-title m-t-40 m-b-0">가입하기</h3>
+                    <div class="form-group m-t-20">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required="" id="name" name="name" placeholder="이름">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="email" id="email_id" name="email_id" required="" placeholder="이메일">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <textarea id="ethereum_acc" name="ethereum_acc" onclick="on()" class="form-control" placeholder="이더리움 계좌주소"></textarea>
+                        </div>
+                    </div>
+                    <div id="overlay">
+                        <div class="form-group">
+                          <div style="background-color:white;" class="row center">
+                            <div style="color:black;" class="col-xs-12">
+                              <div style="background-color:white;" class="col-xs-12">
+                                <p style="font-size:1rem;"> MetaMask의 계좌를 Micture에서 사용하실 계좌로 설정한 후 버튼을 클릭해주세요. </p>
+                              </div>
+                              <div id="AccountList" style="margin-top:40px; display:none; background-color:white; padding-left:50px; padding-right:50px;" class="col-xs-12">
+                                <table >
+                                  <tr>
+                                    <td style="width:50%; text-align:center; padding:0; cursor:auto;">Account</td>
+                                    <td id="MetaAcc" style="cursor:hand; font-weight:bold; width:50%; text-align:center; padding:0;"></td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
+                            <div style="margin-top:40px; margin-bottom:40px;" class="col-xs-12">
+                              <a onclick="getUserAccounts()" >메타마스크 계좌 불러오기</a>
+                              <a onclick="off()" >닫기</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" id="new_password" name="new_password" required="" placeholder="비밀번호">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" id="new_password_check" name="new_password_check" required="" placeholder="비밀번호 확인">
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">가입하기</button>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            <p>이미 아이디가 있으신가요? <a href="pages-login" class="text-info m-l-5"><b>로그인</b></a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script>
+        function checkPw() {
+          var pw = document.getElementById('new_password').value;
+          var pwck = document.getElementById('new_password_check').value;
+  
+          if (pw != pwck) {
+              alert('비밀번호가 다르게 입력되었습니다. 다시 입력해 주세요');
+              return false;
+          }
+        }
+    </script>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/customize.js"></script>
+    <script src="js/web3newmember.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    
+</body>
+
+</html>
