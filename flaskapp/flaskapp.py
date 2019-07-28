@@ -50,10 +50,10 @@ import ssl
 import hashlib
 import gridfs, datetime, json, os, jinja2, flask
 #import jinja2
-#nltk.download('punkt')
-#nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 SENT_DETECTOR = nltk.data.load('tokenizers/punkt/english.pickle')
-app = Flask(__name__, static_url_path='', static_folder=r'/home/ubuntu/flaskapp/static')
+app = Flask(__name__, static_url_path='', static_folder=r'C:\Users\sehoon\Desktop\project\flaskapp\static')
 #my_loader = jinja2.ChoiceLoader([
 #    app.jinja_loader,
 #    jinja2.FileSystemLoader(Config.loader_path),
@@ -72,7 +72,7 @@ except AttributeError:
     pass
 else:
     ssl._create_default_https_context = _create_unverified_https_context
-UPLOAD_FOLDER = r'/home/ubuntu/flaskapp/static/upload'
+UPLOAD_FOLDER = r'C:\Users\sehoon\Desktop\project\flaskapp\static\upload'
 ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg', 'gif'])
 '''
 
