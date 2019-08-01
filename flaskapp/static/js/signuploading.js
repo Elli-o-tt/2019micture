@@ -27,7 +27,7 @@ $(document).ready(function () {
     });
 
     setInterval(function() {
-        $.getJSON("OpenJournal.json", function(data){
+        $.getJSON("Photo.json", function(data){
             var Artifact = data;
             contracts.Photo = TruffleContract(Artifact);
             contracts.Photo.setProvider(web3Provider);
