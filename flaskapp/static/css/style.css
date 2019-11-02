@@ -263,6 +263,10 @@ html body .m-l-40 {
     margin-left: 40px
 }
 
+html body .m-l-150 {
+    margin-left: 150px
+}
+
 html body .m-r-5 {
     margin-right: 5px
 }
@@ -313,6 +317,30 @@ html body .m-t-30 {
 
 html body .m-t-40 {
     margin-top: 40px
+}
+
+html body .m-t-100 {
+    margin-top: 100px
+}
+
+html body .m-t-150 {
+    margin-top: 150px
+}
+
+html body .m-t-250 {
+    margin-top: 250px
+}
+
+html body .m-t-200 {
+    margin-top: 200px
+}
+
+html body .m-t-300 {
+    margin-top: 300px
+}
+
+html body .m-t-400 {
+    margin-top: 400px
 }
 
 html body .m-b-0 {

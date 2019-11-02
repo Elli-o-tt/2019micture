@@ -11,17 +11,14 @@ $(document).ready(function () {
 
     $.getJSON("Photo.json", function(data){
         var Artifact = data;
+        console.log(Artifact);
         contracts.Photo = TruffleContract(Artifact);
         contracts.Photo.setProvider(web3Provider);
         contracts.Photo.deployed().then(async function(instance){
             var newUser = getUserAccount();
             console.log(newUser);
-            await instance.signUp("a", "aa@aa", {from: newUser}).then(function(tx){
-            console.log(tx.receipt);
-            // console.log(tx.receipt.transactionHash);
-            // console.log(tx.receipt.blockNumber);
-            // console.log(tx.receipt.from);
-            // alert(tx.receipt.from);
+            await instance.signUp({from: newUser}).then(function(tx){
+          console.log(tx.receipt);
             });
         });
     });

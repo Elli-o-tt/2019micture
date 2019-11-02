@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1">
+    <meta http-equiv="X-UA-Compatible refresh" content="IE=edge chrome=1">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -26,7 +26,6 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-
 <body class="fix-header fix-sidebar card-no-border">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -49,21 +48,21 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="main">
-                        <!-- Logo icon --><b>
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text --><span>
-                         <!-- dark Logo text -->
-                         <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                         <!-- Light Logo text -->    
-                         <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
-                </div>
+                        <a class="navbar-brand" href="main">
+                            <!-- Logo icon --><b>
+                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                                <!-- Dark Logo icon -->
+                                <img src="assets/images/logomini1.png" alt="homepage" class="dark-logo" />
+                                <!-- Light Logo icon -->
+                                <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                            </b>
+                            <!--End Logo icon -->
+                            <!-- Logo text --><span>
+                             <!-- dark Logo text -->
+                             <img src="assets/images/logominitxt20.png" alt="homepage" class="dark-logo" />
+                             <!-- Light Logo text -->    
+                             <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                    </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
@@ -156,11 +155,9 @@
                         </li>
                         <li> <a href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">PhotoFeeds</span></a>
                         </li>
-                        <li> <a href="#" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Message</span></a>
-                        </li>
                         <li> <a href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">My Time Line</span></a>
                         </li>
-                        <li> <a href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Search My Picture<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with Google</span></a>
+                        <li> <a href="form-search" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Search My Picture<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with Google</span></a>
                         </li>
                         <li> <a href="pages-token" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Token Exchange</span></a>
                         </li>
@@ -206,34 +203,105 @@
                         <div class="card">
                             <div class="el-card-item">
                                 <div class="el-card-avatar">
-                                     <img src='upload/{{data.fileName}}' width="600px"/> 
+                                     <img src='http://127.0.0.1:8080/ipfs/{{data.second_hashValue}}' width="600px"/> 
                                 </div>
                                 <div class="el-card-content">
                                     <h3 class="box-title">제목: {{data.title}}</h3>
-                                    <br/> 
+                                    <br/>
                                 </div>
                                 <div class="el-card-content">
                                         <h4 class="box-title">{{data.content}}</h4>
-                                        <br/> 
                                 </div>
-                                {% if data.hashtag %}
+                                
+                                {% if data.hashTags %}
                                 <div class="el-card-content">
-                                        <small class="box-title" style="color:blue">#{{data.hashtag}}</small>
+                                        {% for j in data.hashTags %}
+                                        <small class="box-title" style="color:blue">#{{j.hashTag}} </small>
+                                        {% endfor %}
                                         <br/> 
                                 {% endif %}
+                                <div class="el-card-content">
+                                    <small class="box-title">촬영일: {{data.date}}</small>
+                                </div>
+                                <div class="el-card-content">
+                                    <small class="box-title">촬영장소: {{data.place}}</small>
+                                </div>
+                                <div class="el-card-content">
+                                    <small class="box-title">카메라: {{data.camera}}</small>
+                                </div>
                                 </div>
                                 <div class="el-card-content">
                                         <small class="box-title">Photograph by @{{data.userName}}</small>
-                                        <br/> 
                                 </div>
                                 <div class="el-card-content">
                                         <small class="box-title">Uploaded Time: {{data.time}}</small>
-                                        <br/> 
                                 </div>
                             </div>
                         </div>
                     </div>
             </div>
+
+
+            <div class="comment-window s12 col center">
+                <ul>
+                  {% for j in data.commentDicts %}
+                  <li id={{j.commentNum}} class="comment-list">
+                    <table>
+                      <tbody>
+                        <tr id={{j.userId}}>
+                          <td class="comment-name">
+                            {{j.userName}}
+                          </td>
+                          <td class="comment-date">
+                            {{j.Time}}
+                          </td>
+  
+                          <form action="deleteComment" method="POST">
+                            <textarea style="display:none", name="objectId", id = "objectId">{{data._id}}</textarea>
+                            <textarea style="display:none", name="commentNum", id = "commentNum">{{j.commentNum}}</textarea>
+                                <input type="submit" class="center btn blue darken-4" name="enrollBtn" value="삭제" />
+                        </form>
+                        </tr>
+                        <tr>
+                          <td colspan="4" class="comment-contents">
+                            {{j.comment}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
+                    {% endfor %}
+                  </ul>
+  
+                  <form action="enrollComment" method="POST">
+                    <textarea style="display:none", name="objectId", id = "objectId">{{data._id}}</textarea>
+                       <table>
+                         <tbody>
+                        <tr>
+                          <td class="comment-window-first-td">
+                            <div class="input-field col s12">
+                              <textarea id="comment" name="comment" class="materialize-textarea"></textarea>
+                            </div>
+                          </td>
+                          <td class="comment-window-second-td" name="enroll">
+                              <input type="submit" class="center btn blue darken-4" name="enrollBtn" value="등록" />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </form>
+                </div>
+              </div>
+
+
+
+            <!--
+
+
+                여기에 댓글 처리 
+
+
+            -->
             <!-- ============================================================== -->
             <!-- End PAge Content -->
             <!-- ============================================================== -->
